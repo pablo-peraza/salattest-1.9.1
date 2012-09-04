@@ -11,6 +11,10 @@ import com.mongodb.casbah.Imports._
 object Exe{
 
   def main(a: Array[String]){
+    val dog = Dog("Bobby")
+    val male = Male(30)
+    val joe = Joe("Average")
+    val mmm = IceCream(true)
 
     println(dog.getClass.getInterfaces.map(_.getName).mkString("[", ", ", "]"))
     println("Product, CaseClass or anything 'salat-able' should be there, but isn't D=")
@@ -40,44 +44,32 @@ object Exe{
     println(MaleDAO.find(MongoDBObject.empty))
     println(JoeDAO.find(MongoDBObject.empty))
     println(IceCreamDAO.find(MongoDBObject.empty))
+  } //end of main
+} //end of Exe
 
-
-
-  }
-
-  @Salat
-  trait Animal extends Product{
-    var value1: String
-  }
-
-  @Salat
-  abstract class Human(value2: Int) extends Product
-
-  @Salat
-  abstract class Person(value1: String) extends Animal
-
-  case class Dog(var value1: String) extends Animal
-  case class Male(value2: Int) extends Human(value2)
-  case class Joe(var value1: String) extends Person(value1)
-
-  case class IceCream(value: Boolean)
-
-  object AnimalDAO extends SalatDAO[Animal, ObjectId](MongoConnection("localhost")("test")("salat"))
-  object HumanDAO extends SalatDAO[Human, ObjectId](MongoConnection("localhost")("test")("salat"))
-  object PersonDAO extends SalatDAO[Person, ObjectId](MongoConnection("localhost")("test")("salat"))
-
-  object DogDAO extends SalatDAO[Dog, ObjectId](MongoConnection("localhost")("test")("salat"))
-  object MaleDAO extends SalatDAO[Male, ObjectId](MongoConnection("localhost")("test")("salat"))
-  object JoeDAO extends SalatDAO[Joe, ObjectId](MongoConnection("localhost")("test")("salat"))
-
-  object IceCreamDAO extends SalatDAO[IceCream, ObjectId](MongoConnection("localhost")("test")("salat"))
-
-  val dog = Dog("Bobby")
-  val male = Male(30)
-  val joe = Joe("Average")
-  val mmm = IceCream(true)
-
-
+@Salat
+trait Animal extends Product{
+  var value1: String
 }
 
+@Salat
+abstract class Human(value2: Int) extends Product
 
+@Salat
+abstract class Person(value1: String) extends Animal
+
+case class Dog(var value1: String) extends Animal
+case class Male(value2: Int) extends Human(value2)
+case class Joe(var value1: String) extends Person(value1)
+
+case class IceCream(value: Boolean)
+
+object AnimalDAO extends SalatDAO[Animal, ObjectId](MongoConnection("localhost")("test")("salat"))
+object HumanDAO extends SalatDAO[Human, ObjectId](MongoConnection("localhost")("test")("salat"))
+object PersonDAO extends SalatDAO[Person, ObjectId](MongoConnection("localhost")("test")("salat"))
+
+object DogDAO extends SalatDAO[Dog, ObjectId](MongoConnection("localhost")("test")("salat"))
+object MaleDAO extends SalatDAO[Male, ObjectId](MongoConnection("localhost")("test")("salat"))
+object JoeDAO extends SalatDAO[Joe, ObjectId](MongoConnection("localhost")("test")("salat"))
+
+object IceCreamDAO extends SalatDAO[IceCream, ObjectId](MongoConnection("localhost")("test")("salat"))
