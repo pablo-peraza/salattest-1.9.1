@@ -48,12 +48,12 @@ object Exe{
 } //end of Exe
 
 @Salat
-trait Animal extends Product{
+trait Animal /* extends Product */ {
   var value1: String
 }
 
 @Salat
-abstract class Human(value2: Int) extends Product
+abstract class Human(value2: Int) /* extends Product */ 
 
 @Salat
 abstract class Person(value1: String) extends Animal
